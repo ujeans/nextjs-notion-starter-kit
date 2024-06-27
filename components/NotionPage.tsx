@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import cs from 'classnames'
-import { PageBlock } from 'notion-types'
-import { formatDate, getBlockTitle, getPageProperty } from 'notion-utils'
-import BodyClassName from 'react-body-classname'
+// import { PageBlock } from 'notion-types'
+import { formatDate, getBlockTitle } from 'notion-utils'
+// import BodyClassName from 'react-body-classname'
 import { NotionRenderer } from 'react-notion-x'
 import TweetEmbed from 'react-tweet-embed'
 import { useSearchParam } from 'react-use'
@@ -15,7 +15,7 @@ import { useSearchParam } from 'react-use'
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
 import { mapImageUrl } from '@/lib/map-image-url'
-import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
+import { mapPageUrl } from '@/lib/map-page-url'
 import { searchNotion } from '@/lib/search-notion'
 import { useDarkMode } from '@/lib/use-dark-mode'
 
@@ -24,8 +24,8 @@ import { GitHubShareButton } from './GitHubShareButton'
 import { Loading } from './Loading'
 import { NotionPageHeader } from './NotionPageHeader'
 import { Page404 } from './Page404'
-import { PageAside } from './PageAside'
-import { PageHead } from './PageHead'
+// import { PageAside } from './PageAside'
+// import { PageHead } from './PageHead'
 import styles from './styles.module.css'
 
 // -----------------------------------------------------------------------------
@@ -193,12 +193,12 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const showTableOfContents = !!isBlogPost
   const minTableOfContentsItems = 3
 
-  const pageAside = React.useMemo(
-    () => (
-      <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
-    ),
-    [block, recordMap, isBlogPost]
-  )
+  // const pageAside = React.useMemo(
+  //   () => (
+  //     <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
+  //   ),
+  //   [block, recordMap, isBlogPost]
+  // )
 
   const footer = React.useMemo(() => <Footer />, [])
 
@@ -228,33 +228,33 @@ export const NotionPage: React.FC<types.PageProps> = ({
     g.block = block
   }
 
-  const canonicalPageUrl =
-    !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
+  // const canonicalPageUrl =
+  //   !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
 
-  const socialImage = mapImageUrl(
-    getPageProperty<string>('Social Image', block, recordMap) ||
-      (block as PageBlock).format?.page_cover ||
-      config.defaultPageCover,
-    block
-  )
+  // const socialImage = mapImageUrl(
+  //   getPageProperty<string>('Social Image', block, recordMap) ||
+  //     (block as PageBlock).format?.page_cover ||
+  //     config.defaultPageCover,
+  //   block
+  // )
 
-  const socialDescription =
-    getPageProperty<string>('Description', block, recordMap) ||
-    config.description
+  // const socialDescription =
+  //   getPageProperty<string>('Description', block, recordMap) ||
+  //   config.description
 
   return (
     <>
-      <PageHead
+      {/* <PageHead
         pageId={pageId}
         site={site}
         title={title}
         description={socialDescription}
         image={socialImage}
         url={canonicalPageUrl}
-      />
+      /> */}
 
-      {isLiteMode && <BodyClassName className='notion-lite' />}
-      {isDarkMode && <BodyClassName className='dark-mode' />}
+      {/* {isLiteMode && <BodyClassName className='notion-lite' />} */}
+      {/* {isDarkMode && <BodyClassName className='dark-mode' />} */}
 
       <NotionRenderer
         bodyClassName={cs(
@@ -277,7 +277,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
         mapPageUrl={siteMapPageUrl}
         mapImageUrl={mapImageUrl}
         searchNotion={config.isSearchEnabled ? searchNotion : null}
-        pageAside={pageAside}
+        // pageAside={pageAside}
         footer={footer}
       />
 
